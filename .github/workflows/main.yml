@@ -1,0 +1,44 @@
+name: JC AI System CI/CD Pipeline
+
+# Trigger this workflow on every push or pull request to the main branch
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+# Define the jobs to be run
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu environment
+
+    steps:
+      # Step 1: Check out the code from the GitHub repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Python
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      # Step 3: Install dependencies (from requirements.txt)
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Step 4: Run tests (assuming you have tests in a /tests folder)
+      - name: Run tests
+        run: |
+          python -m unittest discover -s tests
+
+      # Optional Step 5: Deploy to Heroku (if you're using Heroku for deployment)
+      # - name: Deploy to Heroku
+      #   run: |
+      #     git push heroku main
+      #   env:
+      #     HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
