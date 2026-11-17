@@ -1,5 +1,5 @@
 import React from 'react';
-import { Brain, Zap, Cube, Network, Clock, Globe } from 'lucide-react';
+import { Brain, Zap, Box as Cube, Network, Clock, Globe } from 'lucide-react';
 
 interface TranscendentCognitionDisplayProps {
   output: {

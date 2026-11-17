@@ -11,7 +11,7 @@ class AdvancedLanguageModel {
 
   constructor() {
     this.hf = new HfInference(process.env.HUGGINGFACE_API_KEY);
-    this.openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+    this.openai = new OpenAI({ apiKey: 'not-set', dangerouslyAllowBrowser: true });
     this.loadUSEModel();
   }
 
