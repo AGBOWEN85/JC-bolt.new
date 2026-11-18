@@ -9,8 +9,11 @@ class QuantumProcessor {
   }
 
   private initializeQuantumState() {
-    // Initialize a quantum state with a high number of qubits
-    const numQubits = 1000;
+    // NOTE: this was 1000 qubits, but 2 ** 1000 is Infinity, so
+    // Array(2 ** numQubits) threw "Invalid array length" at module scope
+    // (the singleton is constructed on import) and nothing could mount.
+    // 10 qubits -> 1024 amplitudes, matching QuantumInspiredParallelProcessor.
+    const numQubits = 10;
     this.quantumState = Array(2 ** numQubits).fill(0).map(() => new Complex(Math.random(), Math.random()));
     this.normalizeState();
   }

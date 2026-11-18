@@ -46,6 +46,35 @@ class EcosystemIntelligence {
     }
   }
 
+  // Read API expected by EcosystemVisualization. The ecosystem's organism /
+  // relationship state was not present in this class, so these return the
+  // empty state (consistent with KnowledgeGraph's empty initial graph)
+  // instead of throwing "is not a function" from the component's effect,
+  // which unmounts the whole app.
+  getOrganisms(): any[] {
+    return [];
+  }
+
+  getRelationships(): any[] {
+    return [];
+  }
+
+  getOrganismDiversity(): number {
+    return 0;
+  }
+
+  getAdaptabilityScore(): number {
+    return 0;
+  }
+
+  getSymbiosisStrength(): number {
+    return 0;
+  }
+
+  getResilienceScore(): number {
+    return 0;
+  }
+
   // ... (keep other existing methods)
 
   private async simulateParallelUniverses(input: Complex[]): Promise<Complex[][]> {

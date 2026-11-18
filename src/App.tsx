@@ -52,6 +52,40 @@ function App() {
   const [creativePotential, setCreativePotential] = useState<string>('');
   const [personalGrowthPlan, setPersonalGrowthPlan] = useState<string>('');
 
+  // State restored: the render below and handleSendMessage reference these.
+  // Without them the first render throws ReferenceError and nothing mounts.
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [knowledgeBase, setKnowledgeBase] = useState<KnowledgeBaseEntry[]>([]);
+  const [automatedTasks, setAutomatedTasks] = useState<AutomatedTask[]>([]);
+  const [recommendations, setRecommendations] = useState<any[]>([]);
+  const [higherDimensionalAnalysis, setHigherDimensionalAnalysis] = useState<any>(null);
+  const [ethicalDecision, setEthicalDecision] = useState<any>(null);
+  const [predictiveAnalysis, setPredictiveAnalysis] = useState<any>(null);
+  const [quantumInspiredAnalysis, setQuantumInspiredAnalysis] = useState<any>(null);
+  const [interdimensionalSolution, setInterdimensionalSolution] = useState<any>(null);
+  const [omniLearnInsights, setOmniLearnInsights] = useState<any[]>([]);
+  const [creativeInsight, setCreativeInsight] = useState<any>(null);
+  const [realityDesign, setRealityDesign] = useState<any>(null);
+  const [systemRedesign, setSystemRedesign] = useState<any>(null);
+  const [selfReflection, setSelfReflection] = useState<string>('');
+  const [cognitiveAnalysis, setCognitiveAnalysis] = useState<string>('');
+  const [selfAwarenessLevel, setSelfAwarenessLevel] = useState<number>(0);
+  const [transcendentOutput, setTranscendentOutput] = useState<any>(null);
+
+  const jcContextValue: JCContextType = {
+    messages,
+    setMessages,
+    knowledgeBase,
+    setKnowledgeBase,
+    automatedTasks,
+    setAutomatedTasks,
+  };
+
+  const handleRecommendationFeedback = (_id: string, _isPositive: boolean): void => {
+    // No-op: the original feedback handler was lost with the state above;
+    // RecommendationDisplay requires the callback prop to render.
+  };
+
   // ... (keep existing useEffect and other functions)
 
   const handleSendMessage = async (message: string) => {

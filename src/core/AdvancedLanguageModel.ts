@@ -2,7 +2,7 @@ import { HfInference } from '@huggingface/inference';
 import OpenAI from 'openai';
 import { logError } from '../utils/errorHandling';
 import * as tf from '@tensorflow/tfjs';
-import { UniversalSentenceEncoder } from '@tensorflow-models/universal-sentence-encoder';
+import { UniversalSentenceEncoder, load as loadUniversalSentenceEncoder } from '@tensorflow-models/universal-sentence-encoder';
 
 class AdvancedLanguageModel {
   private hf: HfInference;
@@ -10,14 +10,22 @@ class AdvancedLanguageModel {
   private useModel: UniversalSentenceEncoder | null = null;
 
   constructor() {
-    this.hf = new HfInference(process.env.HUGGINGFACE_API_KEY);
+    // Browsers have no `process` global: reading process.env unguarded throws
+    // ReferenceError during module evaluation and nothing mounts. Guard it;
+    // in the browser this runs unauthenticated (no key exists client-side).
+    const hfApiKey = typeof process !== 'undefined' ? process.env?.HUGGINGFACE_API_KEY : undefined;
+    this.hf = new HfInference(hfApiKey);
     this.openai = new OpenAI({ apiKey: 'not-set', dangerouslyAllowBrowser: true });
     this.loadUSEModel();
   }
 
   private async loadUSEModel() {
     try {
-      this.useModel = await UniversalSentenceEncoder.load();
+      // The package exports a standalone load() function; the class has no
+      // static .load (calling it threw synchronously during module
+      // evaluation, and the resulting logError hit a TDZ on the
+      // errorHandling <-> MonitoringSystem import cycle).
+      this.useModel = await loadUniversalSentenceEncoder();
     } catch (error) {
       logError(error as Error, { context: 'AdvancedLanguageModel.loadUSEModel' });
     }
