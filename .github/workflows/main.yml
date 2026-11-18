@@ -29,9 +29,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # Step 4: Run tests (assuming you have tests in a /tests folder)
+      # Step 4: Run tests (Node built-in test runner, see /tests folder)
       - name: Run tests
         run: npm test
+
+      # Step 5: Verify the production build compiles
+      - name: Build
+        run: npm run build
 
       # Optional Step 5: Deploy to Heroku (if you're using Heroku for deployment)
       # - name: Deploy to Heroku
