@@ -55,7 +55,7 @@ const KnowledgeGraphVisualization: React.FC = () => {
     const width = 600;
     const height = 400;
 
-    svg.attr('width', width).attr('height', height);
+    svg.attr('width', width).attr('height', height).attr('viewBox', `0 0 ${width} ${height}`);
 
     const simulation = d3.forceSimulation(graph.nodes)
       .force('link', d3.forceLink(graph.links).id((d: any) => d.id))
@@ -120,7 +120,7 @@ const KnowledgeGraphVisualization: React.FC = () => {
         <div className="text-red-500">{error}</div>
       ) : (
         <>
-          <svg ref={svgRef}></svg>
+          <svg ref={svgRef} className="w-full h-auto block"></svg>
           {selectedNode && (
             <div className="mt-4 p-4 bg-gray-100 rounded">
               <h3 className="font-bold">{selectedNode.id}</h3>

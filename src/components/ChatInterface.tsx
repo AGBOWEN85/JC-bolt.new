@@ -26,8 +26,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ onSendMessage }) => {
   };
 
   return (
-    <div className="h-full flex flex-col">
-      <div className="flex-grow overflow-y-auto mb-4 p-4 bg-white rounded-lg shadow">
+    <div className="flex flex-col">
+      <div className="min-h-[200px] max-h-[50vh] overflow-y-auto mb-4 p-4 bg-white rounded-lg shadow">
         {messages.map((message, index) => (
           <div
             key={index}

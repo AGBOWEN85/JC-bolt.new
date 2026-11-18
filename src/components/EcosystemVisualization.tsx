@@ -30,7 +30,7 @@ const EcosystemVisualization: React.FC = () => {
       const svg = d3.select(svgRef.current);
       const width = 800;
       const height = 600;
-      svg.attr('width', width).attr('height', height);
+      svg.attr('width', width).attr('height', height).attr('viewBox', `0 0 ${width} ${height}`);
 
       const organisms = ecosystemIntelligence.getOrganisms();
       const relationships = ecosystemIntelligence.getRelationships();
@@ -118,7 +118,7 @@ const EcosystemVisualization: React.FC = () => {
   return (
     <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
       <h2 className="text-2xl font-bold mb-4">Ecosystem Visualization</h2>
-      <svg ref={svgRef}></svg>
+      <svg ref={svgRef} className="w-full h-auto block"></svg>
       <div className="mt-4">
         <h3 className="text-xl font-semibold mb-2">Ecosystem Stats</h3>
         <ul>

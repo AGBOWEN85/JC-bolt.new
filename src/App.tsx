@@ -145,7 +145,7 @@ function App() {
           </h1>
         </header>
         <main className="flex-grow flex flex-col md:flex-row">
-          <div className="flex-grow p-4 overflow-y-auto">
+          <div className="flex-grow min-w-0 p-4 overflow-y-auto">
             <ChatInterface onSendMessage={handleSendMessage} />
             <RecommendationDisplay 
               recommendations={recommendations}
@@ -213,7 +213,7 @@ function App() {
               </>
             )}
           </div>
-          <div className="md:w-1/4 p-4 bg-white shadow-md">
+          <div className="md:w-1/4 min-w-0 p-4 bg-white shadow-md">
             <KnowledgeBase />
             <TaskAutomation />
             <KnowledgeGraphVisualization />
